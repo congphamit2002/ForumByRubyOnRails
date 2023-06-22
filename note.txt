@@ -1,1 +1,3 @@
-install simple form, devise from github
+rails g scaffold Tweet tweet:text   - generate scaffold, it has simple crud for tweet model
+next, we are user rails db:migrate to migrate it
+install better_errors, gaurd, guard-livereload, bulma-rails, simple-form, gravatar image tag, devise

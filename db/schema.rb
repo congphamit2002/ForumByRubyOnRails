@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_22_154935) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_22_155721) do
   create_table "chanels", force: :cascade do |t|
     t.string "chanel"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "discussion_id"
   end
 
   create_table "discussions", force: :cascade do |t|
@@ -23,12 +24,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_22_154935) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.integer "chanel_id"
   end
 
   create_table "replies", force: :cascade do |t|
     t.text "reply"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "discussion_id"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|

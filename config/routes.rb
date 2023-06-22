@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :chanels
-  resources :discussions
+  resources :discussions do
+    resources :replies
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   
   # Defines the root path route ("/")

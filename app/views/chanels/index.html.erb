@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Chanels</h1>
+
+<div id="chanels">
+  <% @chanels.each do |chanel| %>
+    <%= render chanel %>
+    <p>
+      <%= link_to "Show this chanel", chanel %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New chanel", new_chanel_path %>

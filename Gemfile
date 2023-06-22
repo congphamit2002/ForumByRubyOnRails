@@ -35,6 +35,18 @@ gem 'gravatar_image_tag', '~> 1.2'
 
 gem 'devise', '~> 4.9', '>= 4.9.2'
 
+gem 'jquery-rails', '~> 4.5', '>= 4.5.1'
+
+gem 'rolify', '~> 6.0', '>= 6.0.1'
+
+gem 'cancancan', '~> 3.5'
+
+gem 'friendly_id', '~> 5.5'
+
+gem 'redcarpet', '~> 3.6'
+
+gem 'coderay', '~> 1.1', '>= 1.1.3'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
@@ -65,7 +77,7 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 
-  
+
   gem 'better_errors', '~> 2.10', '>= 2.10.1'
   gem 'guard', '~> 2.18'
   gem 'guard-livereload', '~> 2.5', '>= 2.5.2', require: false

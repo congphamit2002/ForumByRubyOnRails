@@ -2,3 +2,26 @@ rails g scaffold Tweet tweet:text   - generate scaffold, it has simple crud for 
 next, we are user rails db:migrate to migrate it
 install dependencies better_errors, gaurd, guard-livereload, bulma-rails, 
 simple-form, gravatar image tag, devise, jquery-rails, rolify, friendly-id, redcarpet
+
+to add a migration
+example:
+step 1: rails g migration addChanelIdToDiscussions chanel_id:integer 
+step 2: check file migration if need
+step 3: rails db:migrate
+
+discussions : add userId user_id => done 
+generate model Reply reply:text => done
+generate scaffold Chanel chanel:strnig => done
+mirgation add Discusstion id to replies => done
+mirgation add Userid id to replies => done
+mirgation add channel id to discussions => done
+mirgation add discussion id to channels => done
+
+
+
+KILL PORT
+netstat -ano | findstr :PORT
+taskkill /PID <PID> /F
+
+
+if don't use delete method check command: rails turbo:install stimulus:install

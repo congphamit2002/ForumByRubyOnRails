@@ -1,18 +1,21 @@
 class DiscussionsController < ApplicationController
   before_action :set_discussion, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :find_chanels, only: %i[index show new edit]
 
   # GET /discussions or /discussions.json
   def index
-    @discussions = Discussion.all
+    @discussions = Discussion.all.order('created_at desc')
   end
 
   # GET /discussions/1 or /discussions/1.json
   def show
+    @discussions = Discussion.all.order('created_at desc')
   end
 
   # GET /discussions/new
   def new
-    @discussion = Discussion.new
+    @discussion = current_user.discussions.build
   end
 
   # GET /discussions/1/edit
@@ -21,11 +24,11 @@ class DiscussionsController < ApplicationController
 
   # POST /discussions or /discussions.json
   def create
-    @discussion = Discussion.new(discussion_params)
+    @discussion = current_user.discussions.build(discussion_params)
 
     respond_to do |format|
       if @discussion.save
-        format.html { redirect_to discussion_url(@discussion), notice: "Discussion was successfully created." }
+        format.html { redirect_to @discussion, notice: "Discussion was successfully created." }
         format.json { render :show, status: :created, location: @discussion }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +41,7 @@ class DiscussionsController < ApplicationController
   def update
     respond_to do |format|
       if @discussion.update(discussion_params)
-        format.html { redirect_to discussion_url(@discussion), notice: "Discussion was successfully updated." }
+        format.html { redirect_to @discussion, notice: "Discussion was successfully updated." }
         format.json { render :show, status: :ok, location: @discussion }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -63,8 +66,12 @@ class DiscussionsController < ApplicationController
       @discussion = Discussion.find(params[:id])
     end
 
+    def find_chanels
+      @chanels = Chanel.all.order('created_at desc')
+    end
+
     # Only allow a list of trusted parameters through.
     def discussion_params
-      params.require(:discussion).permit(:title, :content)
+      params.require(:discussion).permit(:title, :content, :chanel_id)
     end
 end

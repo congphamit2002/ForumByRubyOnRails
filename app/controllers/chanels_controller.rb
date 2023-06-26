@@ -4,10 +4,13 @@ class ChanelsController < ApplicationController
   # GET /chanels or /chanels.json
   def index
     @chanels = Chanel.all
+    @discussions = Discussion.all.order('created_at desc')
   end
 
   # GET /chanels/1 or /chanels/1.json
   def show
+    @discussions = Discussion .where('chanel_id = ?', @chanel.id)
+    @chanels = Chanel.all
   end
 
   # GET /chanels/new
@@ -25,7 +28,7 @@ class ChanelsController < ApplicationController
 
     respond_to do |format|
       if @chanel.save
-        format.html { redirect_to chanel_url(@chanel), notice: "Chanel was successfully created." }
+        format.html { redirect_to chanels_path, notice: "Chanel was successfully created." }
         format.json { render :show, status: :created, location: @chanel }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +41,7 @@ class ChanelsController < ApplicationController
   def update
     respond_to do |format|
       if @chanel.update(chanel_params)
-        format.html { redirect_to chanel_url(@chanel), notice: "Chanel was successfully updated." }
+        format.html { redirect_to chanels_path, notice: "Chanel was successfully updated." }
         format.json { render :show, status: :ok, location: @chanel }
       else
         format.html { render :edit, status: :unprocessable_entity }

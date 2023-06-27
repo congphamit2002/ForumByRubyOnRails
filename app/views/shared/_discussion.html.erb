@@ -11,21 +11,27 @@
                 <h3 class="title is-5"><%= discussion.title %></h3>
                 <% end %>
                 <div class="content">
-                    <%= truncate(discussion.content, length: 140) %>
+                    <%= truncate(strip_markdown(discussion.content), length: 140) %>
                     <p><em><small>Posted <%= time_ago_in_words(discussion.created_at) %> ago in 
                     <% if discussion.chanel %>
                     <%= link_to discussion.chanel.chanel, discussion.chanel %>
                     <% end %>
-                    by <%= discussion.user.email %>
+                    by <%= discussion.user.username %>
                     </small></em></p>
                 </div>
             </div>
 
             <!-- TO do: add user level check -->
-            <div class="column has-text-right">
-                <%= link_to 'Edit', edit_discussion_path(discussion), class: 'button' %>
-                <%= link_to 'Delete', discussion, method: :delete, data: {confirm: 'Are you sure?'},class: 'button' %>
-            </div>
+            <% if discussion_author(discussion) || has_role?(:admin) %>
+                <div class="column has-text-right">
+                    <%= link_to 'Edit', edit_discussion_path(discussion), class: 'button' %>
+                    <%= link_to 'Delete', discussion, 
+                    data: {
+                        turbo_method: :delete,
+                        turbo_confirm: 'Are you sure?'
+                    }, class: 'button' %>
+                </div>
+            <% end %>
         </div>
         <%end%>
     </div>

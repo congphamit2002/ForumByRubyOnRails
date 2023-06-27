@@ -25,3 +25,18 @@ taskkill /PID <PID> /F
 
 
 if don't use delete method check command: rails turbo:install stimulus:install
+
+
+using redcarpet to generate markdown
+
+using cancancan and rolify to control role
+
+rails g cancan:ability
+rails g rolify Role User
+rails db:migrate
+
+add rolify to User and resourcify to Chanel and Discussion
+
+add role for user: find user => @user.add_role "admin", rails db:migrate
+
+define method has_role in ApplicationHelper

@@ -3,9 +3,6 @@ class RepliesController < ApplicationController
     before_action :set_reply, only: [:edit, :update, :show, :destroy]
     before_action :set_discussion, except: [:new]
 
-    def index
-        render plain: 'html'
-    end
 
     def new
     end
@@ -26,11 +23,11 @@ class RepliesController < ApplicationController
     end
 
     def edit
-        @reply = @discussion.replies.find(params[:id])
+        @reply = @discussion.replies.friendly.find(params[:id])
     end
 
     def update
-        @reply = @discussion.replies.find(params[:id])
+        @reply = @discussion.replies.friendly.find(params[:id])
         respond_to do |format|
             if @reply.update(reply_params)
                 format.html {redirect_to discussion_path(@discussion), notice: 'Reply is successfully updated'}
@@ -43,7 +40,7 @@ class RepliesController < ApplicationController
     end
 
     def destroy
-        @reply = @discussion.replies.find(params[:id])
+        @reply = @discussion.replies.friendly.find(params[:id])
         @reply.destroy
         redirect_to discussion_path(@discussion)    
     end
@@ -53,11 +50,11 @@ class RepliesController < ApplicationController
 
     private
     def set_reply
-        @reply = Reply.find(params[:id])
+        @reply = Reply.friendly.find(params[:id])
     end
     
     def set_discussion
-        @discussion = Discussion.find(params[:discussion_id])
+        @discussion = Discussion.friendly.find(params[:discussion_id])
     end
 
     def reply_params

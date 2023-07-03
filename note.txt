@@ -40,3 +40,9 @@ add rolify to User and resourcify to Chanel and Discussion
 add role for user: find user => @user.add_role "admin", rails db:migrate
 
 define method has_role in ApplicationHelper
+
+
+to create pretty URL using friendlyId
+
+rails g friendly_id
+rails db:migrate

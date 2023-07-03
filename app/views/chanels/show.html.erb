@@ -1,10 +1,16 @@
-<p style="color: green"><%= notice %></p>
+<div class="level">
+  <div class="level-left">
+  <h1 class="title is-2"><%= @chanel.chanel %></h1>
+  </div>
+  <div class="level-right">
+  <% if has_role?(:admin) %>
+    <%= link_to 'Edit channel', edit_chanel_path(@chanel), class:"button" %>
+  <% end %>
+  </div>
+</div>
+<hr />
 
-<%= render @chanel %>
-
-<div>
-  <%= link_to "Edit this chanel", edit_chanel_path(@chanel) %> |
-  <%= link_to "Back to chanels", chanels_path %>
-
-  <%= button_to "Destroy this chanel", @chanel, method: :delete %>
+<div class="columns">
+ <%= render 'shared/discussion' %>
+ <%= render 'discussions/sidebar' %>
 </div>
